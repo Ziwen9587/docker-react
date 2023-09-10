@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  ziwen_web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "2001:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  ziwen_web_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
