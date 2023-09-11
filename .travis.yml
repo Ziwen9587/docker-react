@@ -8,3 +8,17 @@ before_install:
 
 script:
   - docker run -e CI=true ziwen/docker-react npm run test
+
+# Deploy to AWS
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "el-docker-react-practice"
+  evn: "El-docker-react-practice-env"
+  bucket_name: "elasticbeanstalk-us-east-2-968088250419"
+  bucket_path: "el-docker-react-practice"
+  # Declare only update on master branch would be deployed (not feature branch)
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
